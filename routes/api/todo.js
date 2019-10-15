@@ -54,6 +54,7 @@ router.get("/soon", async (req, res) => {
   }
 });
 
+// Create new todo
 router.post("/", async (req, res) => {
   try {
     const newTodo = new Todo({
@@ -74,16 +75,16 @@ router.post("/", async (req, res) => {
 });
 
 // Update todo by id
-// router.put("/:id", async (req, res) => {
-//   try {
-//     const todo = await Todo.findById(req.params.id);
+router.put("/:id", async (req, res) => {
+  try {
+    const todo = await Todo.updateOne({ _id: req.params.id }, req.body);
 
-//     res.json(todo);
-//   } catch (error) {
-//     console.error(error.message);
-//     res.status(500).send("Server error occured...");
-//   }
-// });
+    res.json(todo);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Server error occured...");
+  }
+});
 
 // Delete todo by id
 router.delete("/:id", async (req, res) => {

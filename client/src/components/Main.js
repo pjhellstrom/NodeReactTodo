@@ -1,5 +1,4 @@
 import React, { Fragment, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import TodoCard from "./TodoCard";
@@ -12,13 +11,13 @@ const Main = ({ getTodos, createTodo, todos }) => {
 
   const [formData, setFormData] = useState({
     title: "",
-    content: "",
+    description: "",
     status: "Pending",
     category: "Personal",
     due_date: "2019-10-16"
   });
 
-  const { title, content, status, category, due_date } = formData;
+  const { title, description, status, category, due_date } = formData;
 
   const onChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -32,56 +31,74 @@ const Main = ({ getTodos, createTodo, todos }) => {
   return (
     <Fragment>
       <Fragment>
-        <div className='container is-vertical-center'>
-          <div className='tile is-parent'>
-            <article className='tile is-child notification is-warning'>
-              <p className='title'>Create a Todo</p>
-              <div className='content'>
-                <form onSubmit={e => onSubmit(e)}>
-                  <div className='field'>
-                    <p className='control has-icons-left has-icons-right'>
-                      <input
-                        className='input'
-                        type='text'
-                        placeholder='Title'
-                        name='title'
-                        value={title}
-                        onChange={e => onChange(e)}
-                      />
-                    </p>
-                  </div>
-                  <div className='field'>
-                    <textarea
-                      className='input'
-                      type='text'
-                      placeholder='Content'
-                      name='content'
-                      value={content}
-                      onChange={e => onChange(e)}
-                    />
-                  </div>
-                  <div className='field'>
-                    <span className='select'>
-                      <select
-                        name='category'
-                        value={category}
-                        onChange={e => onChange(e)}>
-                        <option value='Personal'>Personal</option>
-                        <option value='Work'>Work</option>
-                      </select>
-                    </span>
-                  </div>
-                  <div className='field'>
-                    <p className='control'>
-                      <button type='submit' className='button is-dark'>
-                        Save
-                      </button>
-                    </p>
-                  </div>
-                </form>
-              </div>
-            </article>
-          </div>
+        <div className='jumbotron'>
+          <h1 className='display-4'>Node-React to do app</h1>
+          <p className='lead'>This is a simple to do app</p>
+          <hr className='my-4' />
+          <p>Create a new to do below:</p>
+        </div>
+        <div className='container'>
+          <form onSubmit={e => onSubmit(e)}>
+            <div className='form-group'>
+              <label for='Title'>Title</label>
+              <input
+                className='form-control'
+                type='text'
+                placeholder='Title'
+                name='title'
+                value={title}
+                onChange={e => onChange(e)}
+              />
+            </div>
+            <div className='form-group'>
+              <label for='Description'>Description</label>
+              <textarea
+                className='form-control'
+                type='text'
+                placeholder='Description'
+                name='description'
+                value={description}
+                onChange={e => onChange(e)}
+              />
+            </div>
+            <div className='form-group'>
+              <label for='Category'>Select category</label>
+              <select
+                className='form-control'
+                name='category'
+                value={category}
+                onChange={e => onChange(e)}>
+                <option value='Personal'>Personal</option>
+                <option value='Work'>Work</option>
+              </select>
+            </div>
+            <div className='form-group'>
+              <label for='Status'>Select status</label>
+              <select
+                className='form-control'
+                name='status'
+                value={status}
+                onChange={e => onChange(e)}>
+                <option value='Pending'>Pending</option>
+                <option value='Done'>Done</option>
+              </select>
+            </div>
+            <div className='form-group'>
+              <label for='Due date'>Due date</label>
+              <input
+                className='form-control'
+                type='text'
+                placeholder='Due on'
+                name='due_date'
+                value={due_date}
+                onChange={e => onChange(e)}
+              />
+            </div>
+            <button type='submit' class='btn btn-primary'>
+              Submit
+            </button>
+          </form>
+          <br />
         </div>
       </Fragment>
       <Fragment>

@@ -19,8 +19,8 @@ export const getTodos = () => async dispatch => {
   }
 };
 
-// Create or update todo
-export const createTodo = (formData, edit = false) => async dispatch => {
+// Create todo
+export const createTodo = formData => async dispatch => {
   try {
     const config = {
       headers: {
@@ -34,19 +34,36 @@ export const createTodo = (formData, edit = false) => async dispatch => {
       type: GET_TODOS,
       payload: res.data
     });
-
-    // if (!edit) {
-    //   history.push("/");
-    // }
   } catch (err) {
-    const errors = err.response.data.errors;
-
     dispatch({
       type: TODO_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status }
     });
   }
 };
+
+// // Update todo
+// export const updateTodo = formData => async dispatch => {
+//   try {
+//     const config = {
+//       headers: {
+//         "Content-Type": "application/json"
+//       }
+//     };
+
+//     const res = await axios.put("/api/todo/:id", formData, config);
+
+//     dispatch({
+//       type: GET_TODOS,
+//       payload: res.data
+//     });
+//   } catch (err) {
+//     dispatch({
+//       type: TODO_ERROR,
+//       payload: { msg: err.response.statusText, status: err.response.status }
+//     });
+//   }
+// };
 
 // Delete todo
 export const deleteTodo = id => async dispatch => {

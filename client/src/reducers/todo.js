@@ -2,7 +2,6 @@ import { GET_TODOS, DELETE_TODO, TODO_ERROR } from "../actions/types";
 
 const initialState = {
   todos: [],
-  loading: true,
   error: {}
 };
 
@@ -13,20 +12,17 @@ export default function(state = initialState, action) {
     case GET_TODOS:
       return {
         ...state,
-        todos: payload,
-        loading: false
+        todos: payload
       };
     case DELETE_TODO:
       return {
         ...state,
-        todos: state.todo.filter(todo => todo._id !== payload),
-        loading: false
+        todos: state.todo.todos.filter(todo => todo._id !== payload)
       };
     case TODO_ERROR:
       return {
         ...state,
-        error: payload,
-        loading: false
+        error: payload
       };
     default:
       return state;
