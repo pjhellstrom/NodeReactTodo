@@ -1,14 +1,23 @@
-import React from "react";
+import React, { Fragment } from "react";
 import "./App.css";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Provider } from "react-redux";
+import store from "./store";
 
-function App() {
+import Main from "./components/Main";
+
+const App = () => {
   return (
-    <div className='App'>
-      <header className='App-header'>
-        <h1>Hello World</h1>
-      </header>
-    </div>
+    <Provider store={store}>
+      <Router>
+        <Fragment>
+          <Switch>
+            <Route exact path='/' component={Main} />
+          </Switch>
+        </Fragment>
+      </Router>
+    </Provider>
   );
-}
+};
 
 export default App;
